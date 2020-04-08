@@ -1,0 +1,45 @@
+Routing Instructions
+==================
+
+Step 1: 
+  Identify the URL's and matching comp 
+  http://localhost:3000           - Home.js    - Fn 
+  http://localhost:3000/posts     - Posts.js   - Class
+  http://localhost:3000/about     - About.js   - Fn 
+
+  Note: follow proper folder structure 
+    src/
+      components/ 
+        Home/
+          Home.js 
+        About/
+          About.js 
+      containers/
+        Posts/
+          Posts.js 
+         
+
+Step 2: 
+  We need to load matching components for each of the above url's.
+  So, find a package that helps us implement 
+  so, let's download react-router-dom 
+  npm i react-router-dom 
+
+Step 3: 
+  Setup routing in App.js 
+
+   <BrowserRouter>
+    <!-- your app should be here -->
+   </BrowserRouter>
+
+Step 4: 
+    Config the routes with the matching comp 
+    
+    <Switch>
+      <Route path="/" component={Home} exact/>
+      <Route path="/posts" component={Posts} exact/>
+      <Route path="/about" component={About} exact/>
+    </Switch>
+  
+Step 5: 
+  Check the app! Links will work. But, page will refresh.
