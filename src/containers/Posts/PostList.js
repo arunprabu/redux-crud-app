@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import Post from '../../components/Posts/Post';
 import { getPosts, deletePost } from '../../services/postService';
 
+import Post from '../../components/Posts/Post';
+
 class PostList extends Component {
 
   componentDidMount(){
