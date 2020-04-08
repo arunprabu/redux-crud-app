@@ -1,6 +1,9 @@
 Step 0: 
   npm i redux react-redux 
 
+  redux  - core redux framework 
+  react-redux   -- patches up react with redux seamlessy 
+
 Step 1: 
   In src/index.js Setup the the Redux Store here
   import { createStore } from 'redux';
@@ -84,7 +87,7 @@ Step 6: In src/index.js, inside the ReactDOM.render() block,
 =====
 
 Step 7:
-  create action/types.js file for the various actions of the app's feature 
+  create actions/types.js file for the various actions of the app's feature 
   have the following code in it.
 
   export const ADD_POST = 'ADD_POST';
@@ -171,7 +174,7 @@ Step 11:
   It is time to dispatch events from form submission logic 
   // connect() helps props have dispatch method
   // using it we can dispatch action with type and data (payload)
-  so, inside the handleSubmit logic, have a console.log(props)
+  so, inside the handleSubmit logic, have a console.log(this.props);
   
     handleSubmit = (e) => {
       e.preventDefault();
@@ -195,29 +198,28 @@ Step 12:
   import { ADD_POST } from "../actions/types";
   const POSTS_API_URL = 'https://jsonplaceholder.typicode.com/posts';
 
-  //patching the data and returning it to the postReducer
-  export const createPostSuccess =  (data) => {
-      console.log(data);
-      return {
-        type: ADD_POST,
-        payload: {
-          id: data.id,
-          title: data.title,
-          body: data.body
-        }
-      }
-  };
-
   export const createPost = (data) => {
-      return (dispatch) => {
-          return axios.post(POSTS_API_URL, data )
-              .then(response => {
-                  dispatch(createPostSuccess(response.data))
-              })
-              .catch(error => {
-                  throw (error);
-              });
-      };
+    return (dispatch) => {
+      // AJAX call to add a post
+      return axios.post(POSTS_API_URL, data )
+        .then(response => {
+            toastr.success('Success', 'Post has been created!');
+            dispatch({
+              type: ADD_POST,
+              payload: {
+                id: response.data.id,
+                title: response.data.title,
+                body: response.data.body
+              }
+            });
+        })
+        .catch(error => {
+            throw (error);
+        })
+        .finally( () => {
+          
+        }) 
+    };
   };
 
 ======
@@ -283,7 +285,8 @@ Step 16:
 
     export default connect(mapStateToProps)(PostList);
   
-  mapStateToProps method should be defined in the same file before the export
+  //mapStateToProps() method should be defined in the same file before the export
+  
     const mapStateToProps = (state) => {
       return {
           posts: state.posts
@@ -337,11 +340,11 @@ Step 18:
     import { getAllPosts } from './services/postsService';
     
     //To Setup Initial Loading -- for diplaying something at first load -- from rest api call
-    store.dispatch(fetchAllPosts());
+    store.dispatch(getAllPosts());
 
   ------ 
   But, our home page url should not show the all posts. But posts url.
-  So, we have to do now dispatch an action to getAllPosts in PostList.js 
+  So, we have to now dispatch an action to getAllPosts in PostList.js 
     import { getAllPosts } from './services/postsService';
 
   Then, Inside the life cycle hook, 
@@ -629,10 +632,22 @@ Other Important Notes:
     in index.js 
     import 'bootstrap/dist/css/bootstrap.css'
 
+2) Debugging (Writing debuggable code)
+  Use redux dev tools extension
+  Read the doc and config the app to use the extension.
+  you can configure it for production also.
 
+3) Working with action creators
+  // we can create custom event handlers -- they will be available in props
+  const mapDispatchToProps = dispatch => {
+    return {
+      onDelete: id => {
+        dispatch(deletePost(id));
+      }
+    };
+  };
 
+  export default connect(mapStateToProps, mapDispatchToProps)(PostList);
 
-
-
-
-
+4) Webpack and it's config 
+  npm run eject
