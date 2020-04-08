@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 
+import Post from '../../components/Posts/Post';
+
 class PostList extends Component {
 
   render(){
     return(
-      <h1>Post List will come here</h1>
+    
+      <div className='container'>
+        <h3>Post List</h3>
+        <Post></Post>
+      </div> 
     )
   }
 }
