@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import Post from '../../components/Posts/Post';
 import { getPosts, deletePost } from '../../services/postService';
 
-import Post from '../../components/Posts/Post';
 
 class PostList extends Component {
 
@@ -16,7 +15,6 @@ class PostList extends Component {
     console.log(this.props);
     this.props.onGetPosts();
   }
-
 
   render(){
     console.log(this.props.posts);
@@ -29,7 +27,7 @@ class PostList extends Component {
           <Post key={index} 
             title={post.title} 
             body={post.body} 
-            id={post.id} userId={post.userId} onDelete={ this.props.onDelete }></Post>
+            id={post.id} userId={post.userId} ></Post>
         )
       });
     }
@@ -58,12 +56,12 @@ const mapStateToProps = (state) => {
 } 
 
 // The following is around action creators
-//  this method connects redux actions to react props.
+//  this function connects redux actions to react props.
 const mapDispatchToProps = dispatch => {
   return {
-    onDelete: id => {
-      dispatch(deletePost(id));
-    },
+    // onDelete: id => {
+    //   dispatch(deletePost(id));
+    // },
     onGetPosts: () => {
       dispatch(getPosts());
     }

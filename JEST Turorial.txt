@@ -1,0 +1,20 @@
+JEST Turorial
+---
+npm i @testing-library/react react-test-render 
+
+in your comp, in an element add an attribute data-testid='abc123'
+<div data-testid='abc123'>
+  wow 
+</div>
+
+add a separete css file for the comp 
+
+then, add comp.test.js in it..
+--
+import react and react-dom and also the comp we are going to test 
+
+write the test case and then 
+
+npm test
+
+

@@ -13,17 +13,18 @@ import { ADD_POST, GET_POSTS, GET_POST_BY_ID, EDIT_POST, DELETE_POST } from "../
 const postReducer = (state = [], action) => {
   // Actions will be performed GET, POST, PUT, DELETE 
   // Step 8:
+  
   switch(action.type) {
     case ADD_POST:
       return state.concat([action.status]);
     case GET_POSTS:
       return action.posts;
     case GET_POST_BY_ID:
-      return state;
+      return action.post;
     case EDIT_POST:
-      return state;
+      return action.post;
     case DELETE_POST:
-      return state;
+      return action.post;
     default:
       return state;
   }

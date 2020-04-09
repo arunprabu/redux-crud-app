@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ADD_POST, GET_POSTS, DELETE_POST} from '../actions/types';
+import {ADD_POST, GET_POSTS, DELETE_POST, GET_POST_BY_ID, EDIT_POST} from '../actions/types';
 import {toastr} from 'react-redux-toastr';
 
 const POSTS_API_URL = 'http://jsonplaceholder.typicode.com/posts';
@@ -47,12 +47,59 @@ export const getPosts = () => {
   };
 }
 
-export const deletePost = (id) => {
-  console.log(id);
+export const getPostById = (postId) => {
   return (dispatch) => {
-    dispatch({
-      type: DELETE_POST,
-      posts: []
-    });
-  }
+    // AJAX call to get posts
+    return axios.get(POSTS_API_URL + '/' + postId)
+      .then(response => {
+          dispatch({
+            type: GET_POST_BY_ID,
+            post: response.data
+          });
+      })
+      .catch(error => {
+          throw (error);
+      })
+      .finally( () => {
+        
+      }) 
+  };
+}
+
+export const deletePostById = (postId) => {
+  return (dispatch) => {
+    // AJAX call to get posts
+    return axios.delete(POSTS_API_URL + '/' + postId)
+      .then(response => {
+          dispatch({
+            type: DELETE_POST,
+            post: response.data
+          });
+      })
+      .catch(error => {
+          throw (error);
+      })
+      .finally( () => {
+        
+      }) 
+  };
+}
+
+export const updatePostById = (post) => {
+  return (dispatch) => {
+    // AJAX call to get posts
+    return axios.put(POSTS_API_URL + '/' + post.id, post)
+      .then(response => {
+          dispatch({
+            type: EDIT_POST,
+            post: response.data
+          });
+      })
+      .catch(error => {
+          throw (error);
+      })
+      .finally( () => {
+        
+      }) 
+  };
 }
