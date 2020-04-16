@@ -1,0 +1,87 @@
+SASS 
+---
+  https://create-react-app.dev/docs/adding-a-sass-stylesheet/
+
+Error Handling
+—
+	https://learnwithparam.com/blog/error-handling-in-react-hooks/
+
+	Error boundaries are React components that catch JavaScript errors anywhere 
+  in their child component tree, log those errors, 
+  and display a fallback UI instead of the component tree that crashed. 
+  But we won’t see them in the course. 
+
+
+Performance in ReactJS Apps
+---
+Subjective Performance
+---
+The honest truth is that web performance is both subjective and objective. 
+As a user, it is subjective. From a user’s point of view, 
+web performance is about how fast a user perceives the site to be.
+
+Objective Performance
+---
+Objectively, it is the measurable time, in milliseconds, 
+it takes for the web page or web application to be downloaded, 
+painted in the user’s web browser, and become responsive and interactive. 
+That is, the objective time of when a request for content is made until the 
+requested content is displayed on the user’s browser.
+
+---
+https://reactjs.org/docs/optimizing-performance.html
+https://calibreapp.com/blog/react-performance-profiling-optimization
+
+Tips
+--
+1. Use NPM package or any third party libraries only if absolutely needed.
+2. Most performance issues come in lists. So, think about having pagination.
+  Try this awesome package
+  https://bvaughn.github.io/react-virtualized/
+3. Make use of props wisely. Don't leave out unused props. 
+  (show our redux app example, 
+  in which if our app doesn't display the userId anywhere.. dont receive such a prop data)
+  So, a bad way could be...
+  const MyComp = (props) => { //bad way if all props are not used
+
+  }
+
+  but a better way to have props is here.. using object destructuring.
+  cont MyComp = ({ title, body, postId}){ // ignoring userId, if I display it anywhere
+
+  }
+  Also,don't pass unneccessary props. 
+  And wise idea is not to store userId in the redux store.
+
+4. Lazy Load Images 
+  https://www.npmjs.com/package/react-lazy-load-image-component
+5. Use profiler to record the app pages. And then check and fix the app. 
+6. Use Redux Dev Tools to check how long it take for the actions.
+7. Think about optimizing back end also. 
+8. Avoid having unnecessary tags, css.
+9. Don't bloat the page with too many components, 
+  because will have lifecycle hooks and will have re-rendering cycles.
+  If one parent comp updates, that will update child comp's till the last level.
+  Solution could be to use Pure Components 
+10. Don't have more class components. Use functional components. 
+  Use hooks to stop child comp re-rendering. Remember useEffect, useCallback!
+11. Don't write too many inline styles. You should definitely avoid it inside loops.
+12. Don't write inline callbacks in loops. 
+    // bad 
+    <button onClick={() => deleteRecord()} >Delete</button> 
+    // good 
+    const deleteRecord = () =>{
+
+    }
+    <button onClick={deleteRecord} >Delete</button> 
+
+13. Use Why did you update tool
+    https://github.com/maicki/why-did-you-update 
+14. shouldComponentUpdate lifecycle hook
+14. Learn more performance tips.. There are aplenty.
+
+===
+Debugging in Production
+---
+https://medium.com/@baphemot/intro-to-debugging-reactjs-applications-67cf7a50b3dd
+

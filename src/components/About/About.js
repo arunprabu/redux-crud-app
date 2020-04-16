@@ -1,6 +1,12 @@
-import React from 'react'
+import React from 'react';
+import {connect} from 'react-redux';
 
-const About = () => {
+const About = (props) => {
+
+  console.log(props);
+  props.dispatch({
+    type: 'FETCH_USER'
+  });
   return(
     <div className='container'>
       <h1>About</h1>
@@ -8,4 +14,4 @@ const About = () => {
   )
 }
 
-export default About;
+export default connect()(About);

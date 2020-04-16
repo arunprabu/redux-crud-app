@@ -5,10 +5,12 @@ import {reducer as toastrReducer} from 'react-redux-toastr';
 
 //Step 4.2 importing   all reducers here
 import postReducer from './postReducer';
+import userReducer from './userReducer';
 
 //Step 4.3 combine all reducers into one big object for store
 const rootReducers = combineReducers({
   posts: postReducer,
+  contacts: userReducer,
   toastr: toastrReducer // <- Mounted at toastr.
 });
 

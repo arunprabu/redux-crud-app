@@ -1,0 +1,25 @@
+epic
+----
+Epic is a fn that takes actions and returns new actions 
+At a high level, when you use Redux-observable in your application, 
+you need to provide a function with an Observable input and 
+an Observable output. This function is called an epic.
+The Observable input represents all actions dispatched in the application 
+and the Observable output represents all down-stream actions 
+triggered by your async logic. 
+More succinctly, it calls for actions in, actions out.
+
+Epics are very similar to reducer functions in Redux.
+With one difference,
+Reducer returns a state, whereas Epic returns stream of actions
+-----------
+Reference:
+https://blog.logrocket.com/a-beginners-guide-to-redux-observable-c0381da8ed3a/
+https://redux-observable.js.org/docs/recipes/Cancellation.html
+https://hackernoon.com/how-redux-observable-made-ajax-calls-great-again-1p583y3h
+https://dev.to/osamaq/advanced-async-logic-with-redux-observable-2beg
+
+
+
+
+

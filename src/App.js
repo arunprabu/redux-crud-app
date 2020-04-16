@@ -19,13 +19,13 @@ function App() {
         <Header></Header>
 
         <div className='MarginTop'>
-          <Switch>
+          
             <Route path="/" component={Home} exact/>
-            <Route path="/posts" component={Posts} exact/>
+            <Route path="/posts/" component={Posts} exact/>
             <Route path="/posts/new" component={PostForm}/>
             <Route path="/posts/:id" component={PostDetails}/>
             <Route path="/about" component={About}/>
-          </Switch>
+          
           <ReduxToastr
             timeOut={4000}
             newestOnTop={false}
