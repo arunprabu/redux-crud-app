@@ -1,25 +1,26 @@
 import 'rxjs';
-import { map, mergeMap,takeUntil, catchError, filter } from 'rxjs/operators';
+import { map, mergeMap, takeUntil, catchError, filter } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
-import { ajax } from 'rxjs/ajax';
+import { ajax } from 'rxjs/ajax'; // rest api client from rxjs
 
-const FETCH_USER = 'FETCH_USER';
-const FETCH_USER_FULFILLED = 'FETCH_USER_FULFILLED';
-const FETCH_USER_REJECTED = 'FETCH_USER_REJECTED';
-const FETCH_USER_CANCELLED = 'FETCH_USER_CANCELLED';
+const fetchUserFulfilled = payload => ({ type: 'FETCH_USER_FULFILLED', payload }); // will hit reducer 
 
-const fetchUserFulfilled = payload => ({ type: FETCH_USER_FULFILLED, payload });
+const fetchUserRejected = error => ({ type: 'FETCH_USER_REJECTED', error }); // will hit reducer  
 
 export const fetchUserEpic = action$ => action$.pipe(
-  ofType(FETCH_USER),
+  ofType('FETCH_USER'),
   mergeMap(action => ajax('http://jsonplaceholder.typicode.com/users').pipe(
-    map(response => fetchUserFulfilled(response)),
+    map(response => {
+      debugger;
+      return fetchUserFulfilled(response);
+    }),
     takeUntil(action$.pipe(
-      filter(action => action.type === FETCH_USER_CANCELLED)
+      filter(action => action.type === 'FETCH_USER_CANCELLED')
     )),
     catchError( (err) => {
       // handle error- read redux observable docs
       // work with 'FETCH_USER_REJECTED'
+      return fetchUserRejected(err)
     })
   ))
 );

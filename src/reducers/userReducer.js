@@ -9,6 +9,9 @@ const userReducer = (state = [], action) => {
     case 'FETCH_USER_REJECTED':
       return state;
     
+    case 'FETCH_USER_CANCELLED':
+      return state;
+
     default:
       return state;
   }

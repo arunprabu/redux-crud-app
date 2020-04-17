@@ -9,7 +9,11 @@ Error Handling
 	Error boundaries are React components that catch JavaScript errors anywhere 
   in their child component tree, log those errors, 
   and display a fallback UI instead of the component tree that crashed. 
-  But we won’t see them in the course. 
+  We won’t see them in the course. 
+  But here's an example.
+  https://codepen.io/sgroff04/pen/dVbgJy?editors=0010
+
+  You can reproduce the above code in About component in hooks-demo project
 
 
 Performance in ReactJS Apps
