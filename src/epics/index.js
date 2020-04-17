@@ -11,7 +11,6 @@ export const fetchUserEpic = action$ => action$.pipe(
   ofType('FETCH_USER'),
   mergeMap(action => ajax('http://jsonplaceholder.typicode.com/users').pipe(
     map(response => {
-      debugger;
       return fetchUserFulfilled(response);
     }),
     takeUntil(action$.pipe(

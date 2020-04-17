@@ -23,24 +23,27 @@ import rootReducers from './reducers';
 //Provider should be imported from react-redux 
 import { Provider } from 'react-redux'; 
 // Step 14.1
-import logger from 'redux-logger';
+import logger from 'redux-logger'; 
 import thunk from 'redux-thunk'; // logger should be added as last in the middleware
 
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 
 // redux-observable  =============
 import { createEpicMiddleware } from 'redux-observable';
 const epicMiddleware = createEpicMiddleware();
 // ========================= Redux observable ends=========/// 
 
-// to not log anything in production and spread the middleware in applyMiddleware method
+// to not to have logger logs  in production and spread the middleware in applyMiddleware method
 const middleware = [thunk, epicMiddleware]; // redux-observable middleware
-console.log(process.env.NODE_ENV);
+console.log(process.env.NODE_ENV); 
 if(process.env.NODE_ENV !== 'production'){
   middleware.push(logger);
 }
 // read more about env variables here: https://create-react-app.dev/docs/adding-custom-environment-variables/
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = composeWithDevTools({
+});
+//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Step 2: Exec createStore() method and save it in a variable 
 const store = createStore(rootReducers, composeEnhancers(applyMiddleware(...middleware)));  // as part of Step 5.. 
